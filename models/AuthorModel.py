@@ -6,6 +6,6 @@ class Author(Base):
   __tablename__ = "authors"
 
   id = Column(Integer)
-  name = Column(String)
+  name = Column(String(16))
 
   PrimaryKeyConstraint(id)

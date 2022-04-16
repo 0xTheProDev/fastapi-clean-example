@@ -1,19 +1,14 @@
-import os
 from sqlalchemy import create_engine
 
-DEBUG_MODE = os.getenv("DEBUG_MODE")
+from configs.Environment import getEnvironmentVariables
 
-DATABASE_DIALECT = os.getenv("DATABASE_DIALECT")
-DATABASE_HOSTNAME = os.getenv("DATABASE_HOSTNAME")
-DATABASE_NAME = os.getenv("DATABASE_NAME")
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
-DATABASE_PORT = os.getenv("DATABASE_PORT")
-DATABASE_USERNAME = os.getenv("DATABASE_USERNAME")
+# Runtime Environment Configuration
+env = getEnvironmentVariables()
 
-DATABASE_URL = f"{DATABASE_DIALECT}://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOSTNAME}:{DATABASE_PORT}"
+# Generate Database URL
+DATABASE_URL = f"{env.DATABASE_DIALECT}://{env.DATABASE_USERNAME}:{env.DATABASE_PASSWORD}@{env.DATABASE_HOSTNAME}:{env.DATABASE_PORT}/{env.DATABASE_NAME}"
 
-print(DATABASE_DIALECT)
-
+# Create Database Engine
 Engine = create_engine(
-  DATABASE_URL, echo=DEBUG_MODE, future=True
+  DATABASE_URL, echo=env.DEBUG_MODE, future=True
 )

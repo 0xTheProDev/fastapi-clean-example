@@ -1,6 +1,8 @@
+from functools import lru_cache
 from pydantic import BaseSettings
 
 class EnvironmentSettings(BaseSettings):
+  APP_NAME: str
   DATABASE_DIALECT: str
   DATABASE_HOSTNAME: str
   DATABASE_NAME: str
@@ -11,3 +13,9 @@ class EnvironmentSettings(BaseSettings):
 
   class Config:
     env_file = ".env"
+    env_file_encoding = "utf-8"
+
+
+@lru_cache
+def getEnvironmentVariables():
+  return EnvironmentSettings()
