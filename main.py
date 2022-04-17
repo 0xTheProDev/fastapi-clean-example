@@ -9,10 +9,7 @@ from routers.BookRouter import BookRouter
 env = getEnvironmentVariables()
 
 # Core Application Instance
-app = FastAPI(
-  title=env.APP_NAME,
-  version=env.API_VERSION
-)
+app = FastAPI(title=env.APP_NAME, version=env.API_VERSION)
 
 # Add Routers
 app.include_router(AuthorRouter)

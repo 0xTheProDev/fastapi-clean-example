@@ -1,0 +1,7 @@
+[tool.black]
+line-length = 60
+
+[tool.isort]
+profile = "black"
+src_paths = ["configs", "core", "dependencies", "models", "repositories", "routers", "schemas", "services"]
+virtual_env = "env"

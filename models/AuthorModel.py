@@ -1,17 +1,23 @@
-from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
+from sqlalchemy import (
+    Column,
+    Integer,
+    PrimaryKeyConstraint,
+    String,
+)
 
 from models.BaseModel import EntityMeta
 
+
 class Author(EntityMeta):
-  __tablename__ = "authors"
+    __tablename__ = "authors"
 
-  id = Column(Integer)
-  name = Column(String(16), nullable=False)
+    id = Column(Integer)
+    name = Column(String(16), nullable=False)
 
-  PrimaryKeyConstraint(id)
+    PrimaryKeyConstraint(id)
 
-  def normalize(self):
-    return {
-      "id": self.id.__str__(),
-      "name": self.name.__str__()
-    }
+    def normalize(self):
+        return {
+            "id": self.id.__str__(),
+            "name": self.name.__str__(),
+        }

@@ -1,10 +1,15 @@
 from pydantic import BaseModel
 
+
 class AuthorPostRequestSchema(BaseModel):
-  name: str
+    name: str
+
 
 class AuthorPostResponseSchema(BaseModel):
-  id: int
+    id: int
 
-class AuthorSchema(AuthorPostRequestSchema, AuthorPostResponseSchema):
-  pass
+
+class AuthorSchema(
+    AuthorPostRequestSchema, AuthorPostResponseSchema
+):
+    pass

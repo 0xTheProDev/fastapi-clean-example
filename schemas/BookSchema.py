@@ -1,10 +1,15 @@
 from pydantic import BaseModel
 
+
 class BookPostRequestSchema(BaseModel):
-  name: str
+    name: str
+
 
 class BookPostResponseSchema(BaseModel):
-  id: int
+    id: int
 
-class BookSchema(BookPostRequestSchema, BookPostResponseSchema):
-  pass
+
+class BookSchema(
+    BookPostRequestSchema, BookPostResponseSchema
+):
+    pass
