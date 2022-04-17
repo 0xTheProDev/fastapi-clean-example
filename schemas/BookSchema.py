@@ -5,11 +5,9 @@ class BookPostRequestSchema(BaseModel):
     name: str
 
 
-class BookPostResponseSchema(BaseModel):
+class BookSchema(BookPostRequestSchema):
     id: int
 
 
-class BookSchema(
-    BookPostRequestSchema, BookPostResponseSchema
-):
-    pass
+class BookAuthorPostRequestSchema(BaseModel):
+    author_id: int

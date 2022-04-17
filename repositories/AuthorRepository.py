@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import Depends
 from sqlalchemy.orm import Session
@@ -7,7 +7,6 @@ from dependencies.DatabaseConnection import (
     get_db_connection,
 )
 from models.AuthorModel import Author
-from schemas.AuthorSchema import AuthorSchema
 
 
 class AuthorRepository:
@@ -18,30 +17,35 @@ class AuthorRepository:
     ) -> None:
         self.db = db
 
-    def list(self, limit: int, start: int) -> List[Author]:
-        self.db.query(Author).offset(start).limit(
-            limit
-        ).all()
+    def list(
+        self,
+        name: Optional[str],
+        limit: Optional[int],
+        start: Optional[int],
+    ) -> List[Author]:
+        query = self.db.query(Author)
 
-    def get(self, id: int) -> Author:
-        return self.db.get(Author, id)
+        if name:
+            query = query.filter_by(name=name)
 
-    def create(self, body: AuthorSchema) -> Author:
-        author = Author(name=body.name)
+        return query.offset(start).limit(limit).all()
+
+    def get(self, author: Author) -> Author:
+        return self.db.get(Author, author.id)
+
+    def create(self, author: Author) -> Author:
         self.db.add(author)
         self.db.commit()
         self.db.refresh(author)
         return author
 
-    def update(self, id: int, body: AuthorSchema) -> Author:
-        author = self.db.get(Author, id)
-        author.name = body.name
+    def update(self, id: int, author: Author) -> Author:
+        author.id = id
+        self.db.merge(author)
         self.db.commit()
-        self.db.refresh(author)
         return author
 
-    def delete(self, id: int) -> None:
-        author = self.db.get(Author, id)
+    def delete(self, author: Author) -> None:
         self.db.delete(author)
         self.db.commit()
         self.db.flush()

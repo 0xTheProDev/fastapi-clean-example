@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends, status
 
 from schemas.AuthorSchema import AuthorSchema
 from schemas.BookSchema import (
+    BookAuthorPostRequestSchema,
     BookPostRequestSchema,
-    BookPostResponseSchema,
     BookSchema,
 )
 from services.BookService import BookService
@@ -15,11 +15,12 @@ BookRouter = APIRouter(prefix="/books", tags=["book"])
 
 @BookRouter.get("/", response_model=List[BookSchema])
 def index(
+    name: Optional[str] = None,
     pageSize: Optional[int] = 100,
     startIndex: Optional[int] = 0,
     bookService: BookService = Depends(),
 ):
-    return bookService.list(pageSize, startIndex)
+    return bookService.list(name, pageSize, startIndex)
 
 
 @BookRouter.get("/{id}", response_model=BookSchema)
@@ -29,7 +30,7 @@ def get(id: int, bookService: BookService = Depends()):
 
 @BookRouter.post(
     "/",
-    response_model=BookPostResponseSchema,
+    response_model=BookSchema,
     status_code=status.HTTP_201_CREATED,
 )
 def create(
@@ -69,7 +70,7 @@ def get_authors(
 )
 def add_author(
     id: int,
-    author: AuthorSchema,
+    author: BookAuthorPostRequestSchema,
     bookService: BookService = Depends(),
 ):
     return bookService.add_author(id, author)

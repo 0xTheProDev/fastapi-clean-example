@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from fastapi import Depends
+from models.AuthorModel import Author
 
 from repositories.AuthorRepository import AuthorRepository
 from schemas.AuthorSchema import AuthorSchema
@@ -14,34 +15,39 @@ class AuthorService:
     ) -> None:
         self.authorRepository = authorRepository
 
-    def create(self, author: AuthorSchema) -> AuthorSchema:
+    def create(
+        self, author_body: AuthorSchema
+    ) -> AuthorSchema:
         return self.authorRepository.create(
-            author
+            Author(name=author_body.name)
         ).normalize()
 
     def delete(self, author_id: int) -> None:
-        return self.authorRepository.delete(author_id)
+        return self.authorRepository.delete(
+            Author(id=author_id)
+        )
 
     def get(self, author_id: int) -> AuthorSchema:
         return self.authorRepository.get(
-            author_id
-        ).normalize
+            Author(id=author_id)
+        ).normalize()
 
     def list(
         self,
+        name: Optional[str] = None,
         pageSize: Optional[int] = 100,
         startIndex: Optional[int] = 0,
     ) -> List[AuthorSchema]:
         return [
             author.normalize()
             for author in self.authorRepository.list(
-                pageSize, startIndex
+                name, pageSize, startIndex
             )
         ]
 
     def update(
-        self, author_id: int, author: AuthorSchema
+        self, author_id: int, author_body: AuthorSchema
     ) -> AuthorSchema:
         return self.authorRepository.update(
-            author_id, author
+            author_id, Author(name=author_body.name)
         ).normalize()

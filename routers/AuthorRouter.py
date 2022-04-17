@@ -4,7 +4,6 @@ from fastapi import APIRouter, Depends, status
 
 from schemas.AuthorSchema import (
     AuthorPostRequestSchema,
-    AuthorPostResponseSchema,
     AuthorSchema,
 )
 from services.AuthorService import AuthorService
@@ -14,11 +13,12 @@ AuthorRouter = APIRouter(prefix="/authors", tags=["author"])
 
 @AuthorRouter.get("/", response_model=List[AuthorSchema])
 def index(
+    name: Optional[str] = None,
     pageSize: Optional[int] = 100,
     startIndex: Optional[int] = 0,
     authorService: AuthorService = Depends(),
 ):
-    return authorService.list(pageSize, startIndex)
+    return authorService.list(name, pageSize, startIndex)
 
 
 @AuthorRouter.get("/{id}", response_model=AuthorSchema)
@@ -28,7 +28,7 @@ def get(id: int, authorService: AuthorService = Depends()):
 
 @AuthorRouter.post(
     "/",
-    response_model=AuthorPostResponseSchema,
+    response_model=AuthorSchema,
     status_code=status.HTTP_201_CREATED,
 )
 def create(

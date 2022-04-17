@@ -5,11 +5,5 @@ class AuthorPostRequestSchema(BaseModel):
     name: str
 
 
-class AuthorPostResponseSchema(BaseModel):
+class AuthorSchema(AuthorPostRequestSchema):
     id: int
-
-
-class AuthorSchema(
-    AuthorPostRequestSchema, AuthorPostResponseSchema
-):
-    pass

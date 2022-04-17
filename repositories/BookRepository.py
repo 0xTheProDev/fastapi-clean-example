@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import Depends
 from sqlalchemy.orm import Session, lazyload
@@ -18,35 +18,38 @@ class BookRepository:
     ) -> None:
         self.db = db
 
-    def list(self, limit: int, start: int) -> List[Book]:
-        return (
-            self.db.query(Book)
-            .offset(start)
-            .limit(limit)
-            .all()
-        )
+    def list(
+        self,
+        name: Optional[str],
+        limit: Optional[int],
+        start: Optional[int],
+    ) -> List[Book]:
+        query = self.db.query(Book)
 
-    def get(self, id: int) -> Book:
+        if name:
+            query = query.filter_by(name=name)
+
+        return query.offset(start).limit(limit).all()
+
+    def get(self, book: Book) -> Book:
         return self.db.get(
-            Book, id, options=[lazyload(Book.authors)]
+            Book, book.id, options=[lazyload(Book.authors)]
         )
 
-    def create(self, body: BookSchema) -> Book:
-        book = Book(name=body.name)
+    def create(self, book: Book) -> Book:
         self.db.add(book)
         self.db.commit()
         self.db.refresh(book)
         return book
 
-    def update(self, id: int, body: BookSchema) -> Book:
-        book = self.db.get(Book, id)
-        book.name = body.name
+    def update(self, id: int, book: Book) -> Book:
+        book.id = id
+        self.db.merge(book)
         self.db.commit()
-        self.db.refresh(book)
         return book
 
-    def delete(self, id: int) -> None:
-        book = self.db.get(Book, id)
+    def delete(self, book: Book) -> None:
+        book = self.db.get(Book, book.id)
         self.db.delete(book)
         self.db.commit()
         self.db.flush()
