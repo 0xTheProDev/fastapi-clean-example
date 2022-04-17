@@ -24,12 +24,12 @@ class RepositoryMeta(Generic[M, K]):
 
   # Fetch an existing instance of the Model by it's unique Id
   @abstractmethod
-  def get_by_id(self, id: K) -> M:
+  def get(self, id: K) -> M:
     pass
 
   # Lists all existing instance of the Model
   @abstractmethod
-  def get_all(self, limit: int, start: int) -> List[M]:
+  def list(self, limit: int, start: int) -> List[M]:
     pass
 
   # Updates an existing instance of the Model

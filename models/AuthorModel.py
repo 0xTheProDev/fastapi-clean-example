@@ -9,3 +9,9 @@ class Author(EntityMeta):
   name = Column(String(16), nullable=False)
 
   PrimaryKeyConstraint(id)
+
+  def normalize(self):
+    return {
+      "id": self.id.__str__(),
+      "name": self.name.__str__()
+    }

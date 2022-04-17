@@ -6,16 +6,16 @@ from dependencies.DatabaseConnection import get_db_connection
 from models.AuthorModel import Author
 from schemas.AuthorSchema import AuthorSchema
 
-class AuthorRepository():
+class AuthorRepository:
   db: Session
   
   def __init__(self, db: Session = Depends(get_db_connection)) -> None:
     self.db = db
 
-  def get_all(self, limit: int, start: int) -> List[AuthorSchema]:
+  def list(self, limit: int, start: int) -> List[AuthorSchema]:
     return [author.__dict__ for author in self.db.query(Author).offset(start).limit(limit).all()]
 
-  def get_by_id(self, id: int) -> AuthorSchema:
+  def get(self, id: int) -> AuthorSchema:
     return self.db.get(Author, id).__dict__
 
   def create(self, body: AuthorSchema) -> AuthorSchema:

@@ -17,10 +17,10 @@ class AuthorService:
     return self.authorRepository.delete(author_id)
 
   def get(self, author_id: int) -> AuthorSchema:
-    return self.authorRepository.get_by_id(author_id)
+    return self.authorRepository.get(author_id)
 
-  def index(self, pageSize: Optional[int] = 100, startIndex: Optional[int] = 0) -> List[AuthorSchema]:
-    return self.authorRepository.get_all(pageSize, startIndex)
+  def list(self, pageSize: Optional[int] = 100, startIndex: Optional[int] = 0) -> List[AuthorSchema]:
+    return self.authorRepository.list(pageSize, startIndex)
 
   def update(self, author_id: int, author: AuthorSchema) -> AuthorSchema:
     return self.authorRepository.update(author_id, author)

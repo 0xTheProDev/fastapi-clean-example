@@ -8,7 +8,7 @@ AuthorRouter = APIRouter(prefix="/authors", tags=["author"])
 
 @AuthorRouter.get("/", response_model=List[AuthorSchema])
 def index(pageSize: Optional[int] = 100, startIndex: Optional[int] = 0, authorService: AuthorService = Depends()):
-  return authorService.index(pageSize, startIndex)
+  return authorService.list(pageSize, startIndex)
 
 @AuthorRouter.get("/{id}", response_model=AuthorSchema)
 def get(id: int, authorService: AuthorService = Depends()):

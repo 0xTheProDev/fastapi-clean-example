@@ -14,7 +14,13 @@ class Book(EntityMeta):
 
   id = Column(Integer)
   name = Column(String(40), nullable=False)
-  authors = relationship("Author", secondary=association_table)
+  authors = relationship("Author", lazy="dynamic", secondary=association_table)
 
   PrimaryKeyConstraint(id)
+
+  def normalize(self):
+    return {
+      "id": self.id.__str__(),
+      "name": self.name.__str__()
+    }
 
