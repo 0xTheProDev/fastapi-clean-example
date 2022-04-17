@@ -9,7 +9,9 @@ from schemas.AuthorSchema import (
 from schemas.BookSchema import BookSchema
 from services.AuthorService import AuthorService
 
-AuthorRouter = APIRouter(prefix="/authors", tags=["author"])
+AuthorRouter = APIRouter(
+    prefix="/v1/authors", tags=["author"]
+)
 
 
 @AuthorRouter.get("/", response_model=List[AuthorSchema])

@@ -1,15 +1,20 @@
 from fastapi import FastAPI
 
 from configs.Environment import getEnvironmentVariables
+from metadata.Tags import Tags
 from models.BaseModel import init
-from routers.AuthorRouter import AuthorRouter
-from routers.BookRouter import BookRouter
+from routers.v1.AuthorRouter import AuthorRouter
+from routers.v1.BookRouter import BookRouter
 
 # Application Environment Configuration
 env = getEnvironmentVariables()
 
 # Core Application Instance
-app = FastAPI(title=env.APP_NAME, version=env.API_VERSION)
+app = FastAPI(
+    title=env.APP_NAME,
+    version=env.API_VERSION,
+    openapi_tags=Tags,
+)
 
 # Add Routers
 app.include_router(AuthorRouter)

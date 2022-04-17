@@ -10,7 +10,7 @@ from schemas.BookSchema import (
 )
 from services.BookService import BookService
 
-BookRouter = APIRouter(prefix="/books", tags=["book"])
+BookRouter = APIRouter(prefix="/v1/books", tags=["book"])
 
 
 @BookRouter.get("/", response_model=List[BookSchema])
