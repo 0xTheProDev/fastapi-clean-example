@@ -6,6 +6,6 @@ class Author(EntityMeta):
   __tablename__ = "authors"
 
   id = Column(Integer)
-  name = Column(String(16))
+  name = Column(String(16), nullable=False)
 
   PrimaryKeyConstraint(id)
