@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, lazyload
 
 from dependencies.DatabaseConnection import (
     get_db_connection,
@@ -31,7 +31,11 @@ class AuthorRepository:
         return query.offset(start).limit(limit).all()
 
     def get(self, author: Author) -> Author:
-        return self.db.get(Author, author.id)
+        return self.db.get(
+            Author,
+            author.id,
+            options=[lazyload(Author.books)],
+        )
 
     def create(self, author: Author) -> Author:
         self.db.add(author)

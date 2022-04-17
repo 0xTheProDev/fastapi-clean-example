@@ -6,6 +6,7 @@ from schemas.AuthorSchema import (
     AuthorPostRequestSchema,
     AuthorSchema,
 )
+from schemas.BookSchema import BookSchema
 from services.AuthorService import AuthorService
 
 AuthorRouter = APIRouter(prefix="/authors", tags=["author"])
@@ -54,3 +55,12 @@ def delete(
     id: int, authorService: AuthorService = Depends()
 ):
     return authorService.delete(id)
+
+
+@AuthorRouter.get(
+    "/{id}/books/", response_model=List[BookSchema]
+)
+def get_books(
+    id: int, authorService: AuthorService = Depends()
+):
+    return authorService.get_books(id)

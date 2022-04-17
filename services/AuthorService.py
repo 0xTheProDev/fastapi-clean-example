@@ -51,3 +51,11 @@ class AuthorService:
         return self.authorRepository.update(
             author_id, Author(name=author_body.name)
         ).normalize()
+
+    def get_books(self, author_id: int):
+        return [
+            book.normalize()
+            for book in self.authorRepository.get(
+                Author(id=author_id)
+            ).books
+        ]
