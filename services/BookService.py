@@ -68,12 +68,21 @@ class BookService:
             )
 
         book = self.bookRepository.get(book_id)
-        book.authors.push(author)
+        book.authors.append(author)
         self.bookRepository.update(book_id, book)
 
         return [
-            author.normalize()
-            for author in self.bookRepository.get(
-                book_id
-            ).authors
+            author.normalize() for author in book.authors
+        ]
+
+    def remove_author(self, book_id: int, author_id: int):
+        book = self.bookRepository.get(book_id)
+        book.authors = filter(
+            lambda author: author.id != author_id,
+            book.authors,
+        )
+        self.bookRepository.update(book_id, book)
+
+        return [
+            author.normalize() for author in book.authors
         ]

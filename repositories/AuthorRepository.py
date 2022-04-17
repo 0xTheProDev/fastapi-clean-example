@@ -18,35 +18,27 @@ class AuthorRepository:
     ) -> None:
         self.db = db
 
-    def list(
-        self, limit: int, start: int
-    ) -> List[AuthorSchema]:
-        return [
-            author.__dict__
-            for author in self.db.query(Author)
-            .offset(start)
-            .limit(limit)
-            .all()
-        ]
+    def list(self, limit: int, start: int) -> List[Author]:
+        self.db.query(Author).offset(start).limit(
+            limit
+        ).all()
 
-    def get(self, id: int) -> AuthorSchema:
-        return self.db.get(Author, id).__dict__
+    def get(self, id: int) -> Author:
+        return self.db.get(Author, id)
 
-    def create(self, body: AuthorSchema) -> AuthorSchema:
+    def create(self, body: AuthorSchema) -> Author:
         author = Author(name=body.name)
         self.db.add(author)
         self.db.commit()
         self.db.refresh(author)
-        return author.__dict__
+        return author
 
-    def update(
-        self, id: int, body: AuthorSchema
-    ) -> AuthorSchema:
+    def update(self, id: int, body: AuthorSchema) -> Author:
         author = self.db.get(Author, id)
         author.name = body.name
         self.db.commit()
         self.db.refresh(author)
-        return author.__dict__
+        return author
 
     def delete(self, id: int) -> None:
         author = self.db.get(Author, id)

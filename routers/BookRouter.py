@@ -56,7 +56,7 @@ def delete(id: int, bookService: BookService = Depends()):
 
 
 @BookRouter.get(
-    "/{id}/author", response_model=List[AuthorSchema]
+    "/{id}/authors/", response_model=List[AuthorSchema]
 )
 def get_authors(
     id: int, bookService: BookService = Depends()
@@ -65,11 +65,23 @@ def get_authors(
 
 
 @BookRouter.post(
-    "/{id}/author", response_model=List[AuthorSchema]
+    "/{id}/authors/", response_model=List[AuthorSchema]
 )
 def add_author(
     id: int,
     author: AuthorSchema,
     bookService: BookService = Depends(),
 ):
-    return bookService.get_author(id)
+    return bookService.add_author(id, author)
+
+
+@BookRouter.delete(
+    "/{id}/authors/{author_id}",
+    response_model=List[AuthorSchema],
+)
+def remove_author(
+    id: int,
+    author_id: int,
+    bookService: BookService = Depends(),
+):
+    return bookService.remove_author(id, author_id)
