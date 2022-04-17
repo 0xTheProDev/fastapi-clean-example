@@ -12,6 +12,7 @@ httptools==0.4.0
 identify==2.4.12
 idna==3.3
 mypy-extensions==0.4.3
+mysqlclient==2.1.0
 nodeenv==1.6.0
 pathspec==0.9.0
 platformdirs==2.5.1
