@@ -1,37 +1,39 @@
+from fastapi import Depends
 from sqlalchemy.orm import Session
 from typing import List
 
+from dependencies.DatabaseConnection import get_db_connection
 from models.AuthorModel import Author
-from schemas.AuthorSchema import AuthorPostRequestSchema, AuthorPostResponseSchema, AuthorSchema
+from schemas.AuthorSchema import AuthorSchema
 
 class AuthorRepository():
-  @classmethod
-  def get_all(self, db: Session, limit: int, start: int) -> List[AuthorSchema]:
-    return [author.__dict__ for author in db.query(Author).offset(start).limit(limit).all()]
+  db: Session
+  
+  def __init__(self, db: Session = Depends(get_db_connection)) -> None:
+    self.db = db
 
-  @classmethod
-  def get_by_id(self, db: Session, id: int) -> AuthorSchema:
-    return db.get(Author, id).__dict__
+  def get_all(self, limit: int, start: int) -> List[AuthorSchema]:
+    return [author.__dict__ for author in self.db.query(Author).offset(start).limit(limit).all()]
 
-  @classmethod
-  def create(self, db: Session, body: AuthorPostRequestSchema) -> AuthorPostResponseSchema:
+  def get_by_id(self, id: int) -> AuthorSchema:
+    return self.db.get(Author, id).__dict__
+
+  def create(self, body: AuthorSchema) -> AuthorSchema:
     author = Author(name=body.name)
-    db.add(author)
-    db.commit()
-    db.refresh(author)
+    self.db.add(author)
+    self.db.commit()
+    self.db.refresh(author)
     return author.__dict__
 
-  @classmethod
-  def update(self, db: Session, id: int, body: AuthorPostRequestSchema) -> AuthorSchema:
-    author = db.get(Author, id)
+  def update(self, id: int, body: AuthorSchema) -> AuthorSchema:
+    author = self.db.get(Author, id)
     author.name = body.name
-    db.commit()
-    db.refresh(author)
+    self.db.commit()
+    self.db.refresh(author)
     return author.__dict__
 
-  @classmethod
-  def delete(self, db: Session, id: int) -> None:
-    author = db.get(Author, id)
-    db.delete(author)
-    db.commit()
-    db.flush()
+  def delete(self, id: int) -> None:
+    author = self.db.get(Author, id)
+    self.db.delete(author)
+    self.db.commit()
+    self.db.flush()

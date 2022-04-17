@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from configs.Environment import getEnvironmentVariables
 from models.BaseModel import init
-from routers.Author import AuthorRouter
+from routers.AuthorRouter import AuthorRouter
 
 # Application Environment Configuration
 env = getEnvironmentVariables()

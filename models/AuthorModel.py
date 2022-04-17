@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 
-from .BaseModel import Base
+from models.BaseModel import EntityMeta
 
-class Author(Base):
+class Author(EntityMeta):
   __tablename__ = "authors"
 
   id = Column(Integer)
