@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
-from dependencies.Database import get_db_connection
-from repository.AuthorRepository import AuthorRepository
+from dependencies.DatabaseConnection import get_db_connection
+from repositories.AuthorRepository import AuthorRepository
 from schemas.AuthorSchema import AuthorPostRequestSchema, AuthorPostResponseSchema, AuthorSchema
 
 AuthorRouter = APIRouter(prefix="/authors", tags=["author"])
