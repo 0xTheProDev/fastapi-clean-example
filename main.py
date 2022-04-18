@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 
-from configs.Environment import getEnvironmentVariables
+from configs.Environment import get_environment_variables
 from metadata.Tags import Tags
 from models.BaseModel import init
 from routers.v1.AuthorRouter import AuthorRouter
 from routers.v1.BookRouter import BookRouter
 
 # Application Environment Configuration
-env = getEnvironmentVariables()
+env = get_environment_variables()
 
 # Core Application Instance
 app = FastAPI(

@@ -20,5 +20,5 @@ class EnvironmentSettings(BaseSettings):
 
 
 @lru_cache
-def getEnvironmentVariables():
+def get_environment_variables():
     return EnvironmentSettings()

@@ -3,7 +3,7 @@ from typing import List, Optional
 from fastapi import Depends
 from sqlalchemy.orm import Session, lazyload
 
-from dependencies.DatabaseConnection import (
+from configs.Database import (
     get_db_connection,
 )
 from models.BookModel import Book
