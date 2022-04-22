@@ -2,11 +2,11 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Depends, status
 
-from schemas.AuthorSchema import (
+from schemas.pydantic.AuthorSchema import (
     AuthorPostRequestSchema,
     AuthorSchema,
 )
-from schemas.BookSchema import BookSchema
+from schemas.pydantic.BookSchema import BookSchema
 from services.AuthorService import AuthorService
 
 AuthorRouter = APIRouter(
@@ -21,12 +21,17 @@ def index(
     startIndex: Optional[int] = 0,
     authorService: AuthorService = Depends(),
 ):
-    return authorService.list(name, pageSize, startIndex)
+    return [
+        author.normalize()
+        for author in authorService.list(
+            name, pageSize, startIndex
+        )
+    ]
 
 
 @AuthorRouter.get("/{id}", response_model=AuthorSchema)
 def get(id: int, authorService: AuthorService = Depends()):
-    return authorService.get(id)
+    return authorService.get(id).normalize()
 
 
 @AuthorRouter.post(
@@ -38,16 +43,16 @@ def create(
     author: AuthorPostRequestSchema,
     authorService: AuthorService = Depends(),
 ):
-    return authorService.create(author)
+    return authorService.create(author).normalize()
 
 
-@AuthorRouter.put("/{id}", response_model=AuthorSchema)
+@AuthorRouter.patch("/{id}", response_model=AuthorSchema)
 def update(
     id: int,
     author: AuthorPostRequestSchema,
     authorService: AuthorService = Depends(),
 ):
-    return authorService.update(id, author)
+    return authorService.update(id, author).normalize()
 
 
 @AuthorRouter.delete(
@@ -65,4 +70,7 @@ def delete(
 def get_books(
     id: int, authorService: AuthorService = Depends()
 ):
-    return authorService.get_books(id)
+    return [
+        book.normalize()
+        for book in authorService.get_books(id)
+    ]

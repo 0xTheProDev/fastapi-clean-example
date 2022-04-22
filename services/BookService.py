@@ -6,8 +6,8 @@ from models.BookModel import Book
 
 from repositories.AuthorRepository import AuthorRepository
 from repositories.BookRepository import BookRepository
-from schemas.AuthorSchema import AuthorSchema
-from schemas.BookSchema import (
+from schemas.pydantic.AuthorSchema import AuthorSchema
+from schemas.pydantic.BookSchema import (
     BookAuthorPostRequestSchema,
     BookSchema,
 )
@@ -25,54 +25,44 @@ class BookService:
         self.authorRepository = authorRepository
         self.bookRepository = bookRepository
 
-    def create(self, book_body: BookSchema) -> BookSchema:
+    def create(self, book_body: BookSchema) -> Book:
         return self.bookRepository.create(
             Book(name=book_body.name)
-        ).normalize()
+        )
 
     def delete(self, book_id: int) -> None:
         return self.bookRepository.delete(Book(id=book_id))
 
-    def get(self, book_id: int) -> BookSchema:
-        return self.bookRepository.get(
-            Book(id=book_id)
-        ).normalize()
+    def get(self, book_id: int) -> Book:
+        return self.bookRepository.get(Book(id=book_id))
 
     def list(
         self,
         name: Optional[str] = None,
         pageSize: Optional[int] = 100,
         startIndex: Optional[int] = 0,
-    ) -> List[BookSchema]:
-        return [
-            book.normalize()
-            for book in self.bookRepository.list(
-                name, pageSize, startIndex
-            )
-        ]
+    ) -> List[Book]:
+        return self.bookRepository.list(
+            name, pageSize, startIndex
+        )
 
     def update(
         self, book_id: int, book_body: BookSchema
-    ) -> BookSchema:
+    ) -> Book:
         return self.bookRepository.update(
             book_id, Book(name=book_body.name)
-        ).normalize()
+        )
 
-    def get_authors(
-        self, book_id: int
-    ) -> List[AuthorSchema]:
-        return [
-            author.normalize()
-            for author in self.bookRepository.get(
-                Book(id=book_id)
-            ).authors
-        ]
+    def get_authors(self, book_id: int) -> List[Author]:
+        return self.bookRepository.get(
+            Book(id=book_id)
+        ).authors
 
     def add_author(
         self,
         book_id: int,
         author_body: BookAuthorPostRequestSchema,
-    ) -> List[AuthorSchema]:
+    ) -> List[Author]:
         author = self.authorRepository.get(
             Author(id=author_body.author_id)
         )
@@ -80,11 +70,11 @@ class BookService:
         book.authors.append(author)
         self.bookRepository.update(book_id, book)
 
-        return [
-            author.normalize() for author in book.authors
-        ]
+        return book.authors
 
-    def remove_author(self, book_id: int, author_id: int):
+    def remove_author(
+        self, book_id: int, author_id: int
+    ) -> List[Author]:
         book = self.bookRepository.get(Book(id=book_id))
         book.authors = filter(
             lambda author: author.id != author_id,
@@ -92,6 +82,4 @@ class BookService:
         )
         self.bookRepository.update(book_id, book)
 
-        return [
-            author.normalize() for author in book.authors
-        ]
+        return book.authors

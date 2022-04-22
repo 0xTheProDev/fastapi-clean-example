@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Depends, status
 
-from schemas.AuthorSchema import AuthorSchema
-from schemas.BookSchema import (
+from schemas.pydantic.AuthorSchema import AuthorSchema
+from schemas.pydantic.BookSchema import (
     BookAuthorPostRequestSchema,
     BookPostRequestSchema,
     BookSchema,
@@ -20,12 +20,17 @@ def index(
     startIndex: Optional[int] = 0,
     bookService: BookService = Depends(),
 ):
-    return bookService.list(name, pageSize, startIndex)
+    return [
+        book.normalize()
+        for book in bookService.list(
+            name, pageSize, startIndex
+        )
+    ]
 
 
 @BookRouter.get("/{id}", response_model=BookSchema)
 def get(id: int, bookService: BookService = Depends()):
-    return bookService.get(id)
+    return bookService.get(id).normalize()
 
 
 @BookRouter.post(
@@ -37,16 +42,16 @@ def create(
     book: BookPostRequestSchema,
     bookService: BookService = Depends(),
 ):
-    return bookService.create(book)
+    return bookService.create(book).normalize()
 
 
-@BookRouter.put("/{id}", response_model=BookSchema)
+@BookRouter.patch("/{id}", response_model=BookSchema)
 def update(
     id: int,
     book: BookPostRequestSchema,
     bookService: BookService = Depends(),
 ):
-    return bookService.update(id, book)
+    return bookService.update(id, book).normalize()
 
 
 @BookRouter.delete(
@@ -62,7 +67,10 @@ def delete(id: int, bookService: BookService = Depends()):
 def get_authors(
     id: int, bookService: BookService = Depends()
 ):
-    return bookService.get_authors(id)
+    return [
+        author.normalize()
+        for author in bookService.get_authors(id)
+    ]
 
 
 @BookRouter.post(
@@ -73,7 +81,10 @@ def add_author(
     author: BookAuthorPostRequestSchema,
     bookService: BookService = Depends(),
 ):
-    return bookService.add_author(id, author)
+    return [
+        author.normalize()
+        for author in bookService.add_author(id, author)
+    ]
 
 
 @BookRouter.delete(
@@ -85,4 +96,9 @@ def remove_author(
     author_id: int,
     bookService: BookService = Depends(),
 ):
-    return bookService.remove_author(id, author_id)
+    return [
+        author.normalize()
+        for author in bookService.remove_author(
+            id, author_id
+        )
+    ]

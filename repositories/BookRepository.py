@@ -7,7 +7,6 @@ from configs.Database import (
     get_db_connection,
 )
 from models.BookModel import Book
-from schemas.BookSchema import BookSchema
 
 
 class BookRepository:
