@@ -3,6 +3,7 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 4,
   "files.associations": {
+    ".coveragerc": "toml",
     ".env": "properties",
     "pyproject.toml": "toml"
   }

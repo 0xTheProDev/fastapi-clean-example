@@ -1,0 +1,6 @@
+[run]
+omit =
+        __mocks__/*
+        __tests__/*
+        **/__init__.py
+        main.py
