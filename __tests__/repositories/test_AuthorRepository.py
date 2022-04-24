@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from unittest import TestCase
-from unittest.mock import create_autospec, patch, ANY
+from unittest.mock import create_autospec, patch
 
 from repositories.AuthorRepository import AuthorRepository
 
