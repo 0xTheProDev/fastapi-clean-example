@@ -49,7 +49,6 @@ class BookRepository:
         return book
 
     def delete(self, book: Book) -> None:
-        book = self.db.get(Book, book.id)
         self.db.delete(book)
         self.db.commit()
         self.db.flush()

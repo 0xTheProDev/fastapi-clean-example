@@ -32,6 +32,19 @@ This example showcases Repository Pattern in Hexagonal Architecture _(also known
   ```
 - Open `localhost:8000/docs` for API Documentation
 
+## Testing
+
+For Testing, `unittest` module is used for Test Suite and Assertion, whereas `pytest` is being used for Test Runner and Coverage Reporter.
+
+- Run the following command to initiate test:
+  ```sh
+  pytest
+  ```
+- To include Coverage Reporting as well:
+  ```sh
+  pytest --cov-report xml --cov=.
+  ```
+
 ## License
 
 &copy; MIT License
