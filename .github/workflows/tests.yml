@@ -1,0 +1,57 @@
+---
+name: Tests
+on:
+  push:
+    branches:
+      - ci
+  pull_request:
+    branches:
+      - main
+    paths:
+      - models
+      - repositories
+      - routers
+      - schemas
+      - services
+
+jobs:
+  unit-tests:
+    name: Unit Test Modules
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install pipenv
+        run: pipx install pipenv
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+          cache: pipenv
+
+      - name: Setup Environment
+        uses: iamsauravsharma/create-dotenv@v1.2.1
+        env:
+          API_VERSION: "1.0.0"
+          APP_NAME: fastapi_example_test
+          DATABASE_DIALECT: ${{ secrets.DATABASE_DIALECT }}
+          DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DEBUG_MODE: False
+
+      - name: Install Dependencies
+        run: pipenv install --dev --ignore-pipfile
+
+      - name: Run Tests
+        run: pipenv run pytest --capture=no --cov-report xml --cov .
+
+      - name: Upload Coverage Report to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: true
