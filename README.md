@@ -1,5 +1,6 @@
 # fastapi-example
 
+[![Tests](https://github.com/Progyan1997/fastapi-example/actions/workflows/tests.yml/badge.svg)](https://github.com/Progyan1997/fastapi-example/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://docs.python.org/3/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![OpenAPI](https://img.shields.io/badge/openapi-6BA539?style=for-the-badge&logo=openapi-initiative&logoColor=fff)](https://www.openapis.org/)
