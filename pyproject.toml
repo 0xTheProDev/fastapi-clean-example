@@ -5,3 +5,11 @@ line-length = 60
 profile = "black"
 src_paths = ["configs", "core", "dependencies", "models", "repositories", "routers", "schemas", "services"]
 virtual_env = "env"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+testpaths = [
+  "__tests__"
+]

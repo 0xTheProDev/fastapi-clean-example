@@ -12,9 +12,5 @@ repos:
         rev: 22.3.0
         hooks:
         -   id: black
-    # -   repo: https://github.com/PyCQA/isort
-    #     rev: 5.10.1
-    #     hooks:
-    #     -   id: isort
 exclude: env
 fail_fast: true
