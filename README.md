@@ -21,7 +21,7 @@ This example showcases Repository Pattern in Hexagonal Architecture _(also known
 
 ## Installation
 
-- Install all the project dependency using [Pipenv](pipenv.pypa.io):
+- Install all the project dependency using [Pipenv](https://pipenv.pypa.io):
 
   ```sh
   $ pipenv install --dev
