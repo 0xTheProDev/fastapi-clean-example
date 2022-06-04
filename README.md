@@ -28,10 +28,22 @@ This example showcases Repository Pattern in Hexagonal Architecture _(also known
   ```
 
 - Run the application from command prompt:
+
   ```sh
   $ pipenv run uvicorn main:app --reload
   ```
+
+- You can also open a shell inside virtual environment:
+
+  ```sh
+  $ pipenv shell
+  ```
+
 - Open `localhost:8000/docs` for API Documentation
+
+- Open `localhost:8000/graphql` for GraphQL Documentation
+
+_*Note:* In case you are not able to access `pipenv` from you `PATH` locations, replace all instances of `pipenv` with `python3 -m pipenv`._
 
 ## Testing
 
