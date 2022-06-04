@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+/** Create Author payload */
+message CreateAuthorRequest {
+  /** Author Name */
+  string name = 1;
+}
+
+/** Delete Author payload */
+message DeleteAuthorRequest {
+  /** Author Id */
+  int64 id = 1;
+}
+
+/** Delete Author response */
+message DeleteAuthorResponse {
+  /** Whether Author was removed */
+  bool deleted = 1;
+}
+
+/** Get Author payload */
+message GetAuthorRequest {
+  /** Author Id */
+  int64 id = 1;
+}
+
+/** Update Author payload */
+message UpdateAuthorRequest {
+  /** Author Id */
+  int64 id = 1;
+}
+
+/** Author Response */
+message Author {
+  /** Author Id */
+  int64 id = 1;
+  /** Author Name */
+  string name = 2;
+}

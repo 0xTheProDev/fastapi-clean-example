@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "protos/Author.proto";
+import "protos/Book.proto";
+
+/** Author Service - All Procedures for operating on Author */
+service AuthorService {
+  /** Creates a new Author */
+  rpc CreateAuthor(CreateAuthorRequest) returns (Author) {}
+  /** Deletes an existing Author */
+  rpc DeleteAuthor(DeleteAuthorRequest) returns (DeleteAuthorResponse) {}
+  /** Fetches an existing Author */
+  rpc GetAuthor(GetAuthorRequest) returns (Author) {}
+  /** Updates an existing Author */
+  rpc UpdateAuthor(UpdateAuthorRequest) returns (Author) {}
+}
+
+/** Book Service - All Procedures for operating on Book */
+service BookService {
+  /** Creates a new Book */
+  rpc CreateBook(CreateBookRequest) returns (Book) {}
+  /** Deletes an existing Book */
+  rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {}
+  /** Fetches an existing Book */
+  rpc GetBook(GetBookRequest) returns (Book) {}
+  /** Updates an existing Book */
+  rpc UpdateBook(UpdateBookRequest) returns (Book) {}
+}

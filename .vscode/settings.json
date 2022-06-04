@@ -6,5 +6,9 @@
     ".coveragerc": "toml",
     ".env": "properties",
     "pyproject.toml": "toml"
+  },
+  "files.trimTrailingWhitespace": true,
+  "[proto3]": {
+    "editor.tabSize": 2
   }
 }

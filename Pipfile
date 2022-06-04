@@ -17,6 +17,7 @@ pytest = "==7.1.2"
 pytest-cov = "==3.0.0"
 black = "==22.3.0"
 strawberry-graphql = {extras = ["debug-server"], version = "==0.114.0"}
+grpcio-tools = "==1.46.3"
 
 [requires]
 python_version = "3.8"

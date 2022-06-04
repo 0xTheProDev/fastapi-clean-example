@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+/** Create Book payload */
+message CreateBookRequest {
+  /** Book Name */
+  string name = 1;
+}
+
+/** Delete Book payload */
+message DeleteBookRequest {
+  /** Book Id */
+  int64 id = 1;
+}
+
+/** Delete Book response */
+message DeleteBookResponse {
+  /** Whether Book was removed */
+  bool deleted = 1;
+}
+
+/** Get Book payload */
+message GetBookRequest {
+  /** Book Id */
+  int64 id = 1;
+}
+
+/** Update Book payload */
+message UpdateBookRequest {
+  /** Book Id */
+  int64 id = 1;
+}
+
+
+/** Book Response */
+message Book {
+  /** Book Id */
+  int32 id = 1;
+  /** Book Name */
+  string name = 2;
+}
