@@ -1,4 +1,4 @@
-# fastapi-example
+# fastapi-clean-example
 
 [![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://docs.python.org/3/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -7,12 +7,12 @@
 [![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://black.readthedocs.io/en/stable/)
 [![Typed with: pydantic](https://img.shields.io/badge/typed%20with-pydantic-BA600F.svg?style=for-the-badge)](https://black.readthedocs.io/en/stable/)
-[![Open Issues](https://img.shields.io/github/issues-raw/Progyan1997/fastapi-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-example/issues)
-[![Closed Issues](https://img.shields.io/github/issues-closed-raw/Progyan1997/fastapi-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-example/issues?q=is%3Aissue+is%3Aclosed)
-[![Open Pulls](https://img.shields.io/github/issues-pr-raw/Progyan1997/fastapi-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-example/pulls)
-[![Closed Pulls](https://img.shields.io/github/issues-pr-closed-raw/Progyan1997/fastapi-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-example/pulls?q=is%3Apr+is%3Aclosed)
-[![Contributors](https://img.shields.io/github/contributors/Progyan1997/fastapi-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-example/graphs/contributors)
-[![Activity](https://img.shields.io/github/last-commit/Progyan1997/fastapi-example?style=for-the-badge&label=most%20recent%20activity)](https://github.com/Progyan1997/fastapi-example/pulse)
+[![Open Issues](https://img.shields.io/github/issues-raw/Progyan1997/fastapi-clean-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-clean-example/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed-raw/Progyan1997/fastapi-clean-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-clean-example/issues?q=is%3Aissue+is%3Aclosed)
+[![Open Pulls](https://img.shields.io/github/issues-pr-raw/Progyan1997/fastapi-clean-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-clean-example/pulls)
+[![Closed Pulls](https://img.shields.io/github/issues-pr-closed-raw/Progyan1997/fastapi-clean-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-clean-example/pulls?q=is%3Apr+is%3Aclosed)
+[![Contributors](https://img.shields.io/github/contributors/Progyan1997/fastapi-clean-example?style=for-the-badge)](https://github.com/Progyan1997/fastapi-clean-example/graphs/contributors)
+[![Activity](https://img.shields.io/github/last-commit/Progyan1997/fastapi-clean-example?style=for-the-badge&label=most%20recent%20activity)](https://github.com/Progyan1997/fastapi-clean-example/pulse)
 
 ## Description
 
