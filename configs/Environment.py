@@ -1,6 +1,13 @@
 from functools import lru_cache
+import os
 
 from pydantic import BaseSettings
+
+
+@lru_cache
+def get_env_filename():
+    runtime_env = os.getenv("ENV")
+    return f".env.{runtime_env}" if runtime_env else ".env"
 
 
 class EnvironmentSettings(BaseSettings):
@@ -15,7 +22,7 @@ class EnvironmentSettings(BaseSettings):
     DEBUG_MODE: bool
 
     class Config:
-        env_file = ".env"
+        env_file = get_env_filename()
         env_file_encoding = "utf-8"
 
 
