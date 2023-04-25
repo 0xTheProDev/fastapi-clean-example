@@ -6,7 +6,7 @@
 [![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)](https://swagger.io/)
 [![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://black.readthedocs.io/en/stable/)
-[![Typed with: pydantic](https://img.shields.io/badge/typed%20with-pydantic-BA600F.svg?style=for-the-badge)](https://black.readthedocs.io/en/stable/)
+[![Typed with: pydantic](https://img.shields.io/badge/typed%20with-pydantic-BA600F.svg?style=for-the-badge)](https://docs.pydantic.dev/)
 [![Open Issues](https://img.shields.io/github/issues-raw/0xTheProDev/fastapi-clean-example?style=for-the-badge)](https://github.com/0xTheProDev/fastapi-clean-example/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed-raw/0xTheProDev/fastapi-clean-example?style=for-the-badge)](https://github.com/0xTheProDev/fastapi-clean-example/issues?q=is%3Aissue+is%3Aclosed)
 [![Open Pulls](https://img.shields.io/github/issues-pr-raw/0xTheProDev/fastapi-clean-example?style=for-the-badge)](https://github.com/0xTheProDev/fastapi-clean-example/pulls)
